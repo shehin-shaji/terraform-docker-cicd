@@ -51,6 +51,9 @@ jobs:
         # Define a unique image name using the GitHub run ID
         IMAGE_NAME="hello-world:${{ github.run_id }}"
 
+        # Save the IMAGE_NAME to a file for later steps
+        echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
+
         # Build the Docker image with the unique name
         docker build -t $IMAGE_NAME .
 
@@ -69,3 +72,5 @@ jobs:
         docker ps -q --filter "ancestor=$IMAGE_NAME" | xargs docker stop
         # Remove the stopped container
         docker ps -a -q --filter "ancestor=$IMAGE_NAME" | xargs docker rm
+      env:
+        IMAGE_NAME: ${{ env.IMAGE_NAME }}
