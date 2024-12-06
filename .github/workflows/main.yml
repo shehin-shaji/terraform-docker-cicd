@@ -23,15 +23,15 @@ jobs:
         terraform_version: '1.4.6'
     
     - name: Terraform Init
-      run: cd terraform-as-modules && terraform fmt -check
+      run: cd terraform && terraform fmt -check
       continue-on-error: true
 
     - name: Terraform Init
-      run: cd terraform-as-modules && terraform init
+      run: cd terraform && terraform init
       continue-on-error: true
 
     - name: Terraform Validate
-      run: cd terraform-as-modules && terraform validate
+      run: cd terraform && terraform validate
       continue-on-error: true
 
   docker-build:
